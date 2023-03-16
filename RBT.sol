@@ -116,8 +116,9 @@ contract RBTToken {
             "Private sale tokens have already been unlocked."
         );
 
-        // uint256 daysSinceContractCreation = (block.timestamp - (block.timestamp % 86400)) / 86400;
-        privateSaleTokensUnlocked = privateSaleTokensLocked;
+        uint256 daysSinceContractCreation = (block.timestamp - (block.timestamp % 86400)) / 86400;
+        privateSaleTokensUnlocked = privateSaleTokensLocked *
+            daysSinceContractCreation;
 
         balances[owner] -= privateSaleTokensUnlocked;
         privateSaleAllocations[owner] += privateSaleTokensUnlocked;
